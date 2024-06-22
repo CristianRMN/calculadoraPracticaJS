@@ -17,3 +17,9 @@ And the numbers add up
 
 We still have more things to do for the calculator to work, let's go with it
 
+**Fixes and new features:**
+1. We've added subtraction logic
+2. Fixed bugs in the calculator when adding and subtracting
+
+
+Now we're going to add more features
