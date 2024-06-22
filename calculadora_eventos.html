@@ -38,6 +38,9 @@
 
     var cifra = "";
     var acumulador = 0;
+    var sumar = false;
+    var restar = false;
+    var primeraOperacion = true;
     function displayNumeros(numero) {
 
       document.getElementById("display").value = cifra + numero;
@@ -46,9 +49,56 @@
 
     function suma(){
       
-      acumulador= acumulador + parseInt(cifra);
+      if(restar){
+        acumulador = acumulador - parseInt(cifra);
+        document.getElementById("display").value = acumulador;
+     
+      }else{
+        acumulador= acumulador + parseInt(cifra);
       document.getElementById("display").value = acumulador;
+      }
+     cifra = "";
+      sumar = true;
+      restar = false;
+
+      primeraOperacion = false;
+    }
+
+    function resta(){
+
+      if(primeraOperacion == false){
+
+      
+      if(sumar){
+        acumulador = acumulador + parseInt(cifra);
+        document.getElementById("display").value = acumulador;
+      }
+      else{
+        acumulador = acumulador - parseInt(cifra);
+        document.getElementById("display").value = acumulador;
+      }
+    }
+    else{
+      acumulador = parseInt(cifra);
+      primeraOperacion = false;
+    }
       cifra = "";
+      sumar = false;
+      restar = true;
+
+    }
+
+    function resultado(){
+
+     if(sumar){
+      document.getElementById("display").value = acumulador + parseInt(cifra);
+     }
+     else if(restar){
+      document.getElementById("display").value = acumulador - parseInt(cifra);
+     }
+
+     acumulador = parseInt(document.getElementById("display").value);
+     cifra = 0;
 
     }
   </script>
@@ -65,7 +115,7 @@
     </tr>
     <tr>
       <td width="26%"><input name="button" type="button" class="numero" id="button" value="+" onclick="suma()"></td>
-      <td width="21%"><input name="button2" type="button" class="numero" id="button2" value="-"></td>
+      <td width="21%"><input name="button2" type="button" class="numero" id="button2" value="-" onclick="resta()"></td>
       <td width="21%"><input name="button3" type="button" class="numero" id="button3" value="*"></td>
       <td width="32%"><input name="button4" type="button" class="numero" id="button4" value="/"></td>
     </tr>
@@ -90,7 +140,7 @@
     <tr>
       <td><input name="num0" type="button" class="numero" id="num0" value="0" onclick="displayNumeros(0)"></td>
       <td><input name="button17" type="button" class="numero" id="button17" value=","></td>
-      <td colspan="2"><input name="button12" type="button" class="igual" id="button12" value="="></td>
+      <td colspan="2"><input name="button12" type="button" class="igual" id="button12" value="=" onclick="resultado()"></td>
     </tr>
   </table>
 
