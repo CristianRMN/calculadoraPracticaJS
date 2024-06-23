@@ -23,3 +23,8 @@ We still have more things to do for the calculator to work, let's go with it
 
 
 Now we're going to add more features
+![imagenCalculadora2](https://github.com/CristianRMN/calculadoraPracticaJS/assets/172594866/37918916-22a2-4427-a3d7-3d00c1709179)
+
+As we can see, apart from the colors that can be ugly, we have put the functionality of division, 
+multiplication and the reset button. The only thing we need is to fix some bugs and put a couple more functionalities and 
+our calculator will be done
