@@ -28,3 +28,10 @@ Now we're going to add more features
 As we can see, apart from the colors that can be ugly, we have put the functionality of division, 
 multiplication and the reset button. The only thing we need is to fix some bugs and put a couple more functionalities and 
 our calculator will be done
+
+**First version of the project**
+![listo](https://github.com/CristianRMN/calculadoraPracticaJS/assets/172594866/ee328a2d-f99e-47e2-8ebf-155c99751a4d)
+
+
+This would be the first version of the calculator project. There are still bugs and it will be expanded with many other things,
+I plan to make a web page by putting javascript and more things. Among them will be this calculator
