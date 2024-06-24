@@ -3,30 +3,45 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Documento sin título</title>
+  <title>Calculadora</title>
   <style>
     .numero {
       width: 60px;
       height: 60px;
-
-
     }
 
     .igual {
       width: 120px;
       height: 60px;
-
     }
 
     table {
       margin: auto;
     }
+    #num1,#num2,#num3,#num4,
+    #num5,#num6,#num7,#num8,
+    #num9,#num0{
+      background-color: rgb(124, 199, 239);
+    }
+    #button,#button2,#button3,#button4,#cuadrado,#raiz{
+      background-color: rgb(255, 199, 232);
+    }
+    #reset{
+      background-color: rgb(255, 125, 129);
+    }
+    #button12{
+      background-color: rgb(230, 255, 177);
+    }
+    #button17{
+      background-color: #aeaeae;
+    }
+
 
     .color_display {
       height: 30px;
       background-color: #000;
       border: medium #FFF;
-      font: "Space Age";
+      font-family: "Space Age";
       color: #0F0;
       font-size: 18px;
       text-align: right;
@@ -35,29 +50,103 @@
   </style>
 
   <script>
-
     var cifra = "";
     var acumulador = 0;
-    function displayNumeros(numero) {
+    var operacion = null;
+    var primeraOperacion = true;
+    
 
+    function displayNumeros(numero) {
       document.getElementById("display").value = cifra + numero;
       cifra = document.getElementById("display").value;
     }
 
-    function suma(){
-      
-      acumulador= acumulador + parseInt(cifra);
+    function realizarOperacion() {
+      if (cifra === "") return;
+
+      var numero = parseFloat(cifra);
+
+      if (primeraOperacion) {
+        acumulador = numero;
+        primeraOperacion = false;
+      } else {
+        switch (operacion) {
+          case 'sumar':
+            acumulador += numero;
+            break;
+          case 'restar':
+            acumulador -= numero;
+            break;
+          case 'multiplicar':
+            acumulador *= numero;
+            break;
+          case 'dividir':
+            if (numero !== 0) {
+              acumulador /= numero;
+            } else {
+              alert("No se puede dividir por cero");
+            }
+            break;
+          case 'potencia':
+            acumulador = Math.pow(acumulador, numero);
+            break;
+          case 'raizCuadrada':
+             acumulador = Math.sqrt(numero);
+             break;
+        }
+      }
+
       document.getElementById("display").value = acumulador;
       cifra = "";
+    }
 
+    function suma() {
+      realizarOperacion();
+      operacion = 'sumar';
+    }
+
+    function resta() {
+      realizarOperacion();
+      operacion = 'restar';
+    }
+
+    function multiplica() {
+      realizarOperacion();
+      operacion = 'multiplicar';
+    }
+
+    function divide() {
+      realizarOperacion();
+      operacion = 'dividir';
+    }
+    
+    function potenciador() {
+      realizarOperacion();
+      operacion = 'potencia';
+    }
+
+    function raiz_cuadrada(){
+      realizarOperacion();
+      operacion = 'raizCuadrada';
+    }
+
+    function resultado() {
+      realizarOperacion();
+      operacion = null;
+    }
+
+    function volverAEmpezar() {
+      cifra = "";
+      acumulador = 0;
+      operacion = null;
+      primeraOperacion = true;
+      document.getElementById("display").value = 0;
     }
   </script>
-
-
 </head>
 
 <body>
-  <table width="15%" border="1">
+  <table width="18%" border="1">
     <tr>
       <td colspan="4" align="center">
         <input name="display" type="text" class="color_display" id="display" size="25">
@@ -65,32 +154,32 @@
     </tr>
     <tr>
       <td width="26%"><input name="button" type="button" class="numero" id="button" value="+" onclick="suma()"></td>
-      <td width="21%"><input name="button2" type="button" class="numero" id="button2" value="-"></td>
-      <td width="21%"><input name="button3" type="button" class="numero" id="button3" value="*"></td>
-      <td width="32%"><input name="button4" type="button" class="numero" id="button4" value="/"></td>
+      <td width="21%"><input name="button2" type="button" class="numero" id="button2" value="-" onclick="resta()"></td>
+      <td width="21%"><input name="button3" type="button" class="numero" id="button3" value="*" onclick="multiplica()"></td>
+      <td width="32%"><input name="button4" type="button" class="numero" id="button4" value="/" onclick="divide()"></td>
     </tr>
     <tr>
       <td><input name="num7" type="button" class="numero" id="num7" value="7" onclick="displayNumeros(7)"></td>
       <td><input name="num8" type="button" class="numero" id="num8" value="8" onclick="displayNumeros(8)"></td>
       <td><input name="num9" type="button" class="numero" id="num9" value="9" onclick="displayNumeros(9)"></td>
-      <td>&nbsp;</td>
+      <td><input name="resetear" type="button" class="numero" id="reset" value="C" onclick="volverAEmpezar()"></td>
     </tr>
     <tr>
       <td><input name="num4" type="button" class="numero" id="num4" value="4" onclick="displayNumeros(4)"></td>
       <td><input name="num5" type="button" class="numero" id="num5" value="5" onclick="displayNumeros(5)"></td>
       <td><input name="num6" type="button" class="numero" id="num6" value="6" onclick="displayNumeros(6)"></td>
-      <td>&nbsp;</td>
+      <td><input name="button5" type="button" class="numero" id="cuadrado" value="x²" onclick="potenciador()"></td>
     </tr>
     <tr>
       <td><input name="num1" type="button" class="numero" id="num1" value="1" onclick="displayNumeros(1)"></td>
       <td><input name="num2" type="button" class="numero" id="num2" value="2" onclick="displayNumeros(2)"></td>
       <td><input name="num3" type="button" class="numero" id="num3" value="3" onclick="displayNumeros(3)"></td>
-      <td>&nbsp;</td>
+      <td><input name="raiz" type="button" class="numero" id="raiz" value="√" onclick="raiz_cuadrada()"></td>
     </tr>
     <tr>
       <td><input name="num0" type="button" class="numero" id="num0" value="0" onclick="displayNumeros(0)"></td>
       <td><input name="button17" type="button" class="numero" id="button17" value=","></td>
-      <td colspan="2"><input name="button12" type="button" class="igual" id="button12" value="="></td>
+      <td colspan="2"><input name="button12" type="button" class="igual" id="button12" value="=" onclick="resultado()"></td>
     </tr>
   </table>
 
